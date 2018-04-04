@@ -14,9 +14,8 @@ function generateBoard(jumlahRow, jumlahCol) {
     return board;
 }
 
-function checkAllVowels() {
+function block() {
     // let board = generateBoard(5, 4);
-    let vowels = 'AIUEO';
     let board = [
         ['A', 'X', 'C', 'Y'],
         ['E', 'O', 'O', 'S'],
@@ -29,17 +28,34 @@ function checkAllVowels() {
     for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board[i].length; j++) {
             try {
-                if (vowels.includes(board[i][j]) === true && vowels.includes(board[i][j + 1]) === true && vowels.includes(board[i + 1][j]) === true && vowels.includes(board[i + 1][j + 1]) === true) {
-                    result.push([board[i][j], board[i][j + 1], board[i + 1][j], board[i + 1][j + 1]]);
-                }
+                result.push([board[i][j], board[i][j + 1], board[i + 1][j], board[i + 1][j + 1]]);
             } catch (error) {}
         }
     }
-    
-    return {
-        total: result.length,
-        result: result
-    };
+
+    return result;
+}
+
+function checkAllVowels() {
+    let vowels = 'AIUEO';
+    let mamam = block();
+    let result = [];
+
+    for (let i = 0; i < mamam.length; i++) {
+        let count = 0;
+        for (let j = 0; j < mamam[i].length; j++) {
+            if (vowels.includes(mamam[i][j]) === true) count++;
+        }
+
+        if (count === 4) result.push(mamam[i]);
+    }
+
+    return result;
+}
+
+function count() {
+    return checkAllVowels().length;
 }
 
 console.log(checkAllVowels());
+console.log(count());
