@@ -51,7 +51,6 @@ function checkVowelInArray(board) {
       }
     }
   }
-  console.log('---');
   return `Total: ${total}, ${result.join(', ')}`;
 }
 
