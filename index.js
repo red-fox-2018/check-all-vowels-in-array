@@ -1,25 +1,34 @@
-var alphabeth = 'abcdefghijklmnopqrstuvwxyz'
-var vowel = 'aiueo'
-function createsNestedArrAndCheckvowel(jumlahROw,JumlahCol){
+var alphabeth = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+function createsNestedArr(jumlahROw,JumlahCol){
   var result = []
-  var resultVowel = []
   for (let i = 0; i < jumlahROw; i++) {
     var colValue = []
-    var countVowel = 0
     for (let j = 0; j < JumlahCol; j++) {
       let randomAlphabet = alphabeth[Math.floor(Math.random()*26)]
-      if(vowel.indexOf(randomAlphabet) !== -1){
-        countVowel ++
-      }
       colValue.push(randomAlphabet)
-    }
-    if(countVowel === JumlahCol){
-      resultVowel.push(colValue)
     }
     result.push(colValue)
   }
-  return {result,resultVowel}
+  return result
 }
 
-console.log(createsNestedArrAndCheckvowel(5,3))
-console.log(createsNestedArrAndCheckvowel(4,2))
+function checkVowel(arr){
+    var vowel = 'AIUEO'
+    var countBlock = 0
+    var vowelBlock = []
+    for(let i =0; i < arr.length-1; i++){
+      var valueVowelBlock = []
+      for (var j = 0; j < arr.length-1; j++) {
+          if(vowel.indexOf(arr[i][j]) !==  -1 && vowel.indexOf(arr[i][j+1]) !==  -1 && vowel.indexOf(arr[i+1][j]) !==  -1 && vowel.indexOf(arr[i+1][j+1]) !==  -1){
+              countBlock++
+              valueVowelBlock.push(arr[i][j],arr[i][j+1],arr[i+1][j],arr[i+1][j+1])
+          }
+      }
+      if(valueVowelBlock.length !== 0){
+            vowelBlock.push(valueVowelBlock)
+      }
+    }
+    return {arr,countBlock,vowelBlock}
+}
+
+console.log(checkVowel(createsNestedArr(15,15)));
