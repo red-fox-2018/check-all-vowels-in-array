@@ -35,8 +35,11 @@ function checkAllVowels() {
             } catch (error) {}
         }
     }
-
-    return result;
+    
+    return {
+        total: result.length,
+        result: result
+    };
 }
 
 console.log(checkAllVowels());
