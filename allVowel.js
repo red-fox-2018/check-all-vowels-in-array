@@ -1,4 +1,4 @@
-function createArr(row, col) {
+function generateBoard(row, col) {
   let newArr = []
   // console.log('Z'.charCodeAt());
 
@@ -9,8 +9,11 @@ function createArr(row, col) {
       newArr[i][j] = String.fromCharCode(indexLetter);
     }
   }
-  console.log(newArr);
-  let counter = 0;
+  return newArr
+}
+
+function createArr(newArr) {
+  let arrBlock = []
   for (var i = 0; i < newArr.length - 1; i++) {
     for (var j = 0; j < newArr[i].length - 1; j++) {
       let blockStr = '';
@@ -18,22 +21,40 @@ function createArr(row, col) {
         blockStr += newArr[i][k];
         blockStr += newArr[i + 1][k];
       }
-      let vowel = 'aiueo';
-      let numOfVowel = 0;
-      for (let k = 0; k < blockStr.length; k++) {
-        for (let l = 0; l < vowel.length; l++) {
-          if (blockStr[k] === vowel[l]) {
-            numOfVowel++;
-          }
+      arrBlock.push(blockStr);
+    }
+  }
+  return arrBlock;
+}
+
+function checkVowel(array) {
+  let counter = 0;
+  let vowel = 'AIUEO';
+  for (let i = 0; i < array.length; i++) {
+    let numOfVowel = 0;
+    for (var j = 0; j < array[i].length; j++) {
+      for (let l = 0; l < vowel.length; l++) {
+        if (array[i][j] === vowel[l]) {
+          numOfVowel++;
         }
       }
-      if (numOfVowel === 4) {
-        counter++;
-      }
+    }
+    if (numOfVowel === 4) {
+      counter++;
     }
   }
   return counter;
 }
 
 
-console.log(createArr(5, 4));
+// var board = [
+//   [ 'E', 'I', 'B', 'Y' ],
+//   [ 'A', 'O', 'V', 'X' ],
+//   [ 'T', 'C', 'C', 'P' ],
+//   [ 'Q', 'N', 'A', 'I' ],
+//   [ 'F', 'W', 'E', 'U' ] ]
+
+let board = generateBoard(5,4)
+let arrOfBlock = createArr(board);
+console.log(board);
+console.log(checkVowel(arrOfBlock));
