@@ -1,3 +1,5 @@
+const Table = require('cli-table');
+
 function generateBoard(jumlahRow, jumlahCol) {
     let board = [];
 
@@ -38,24 +40,32 @@ function block() {
 
 function checkAllVowels() {
     let vowels = 'AIUEO';
-    let mamam = block();
+    let square = block();
     let result = [];
 
-    for (let i = 0; i < mamam.length; i++) {
+    for (let i = 0; i < square.length; i++) {
         let count = 0;
-        for (let j = 0; j < mamam[i].length; j++) {
-            if (vowels.includes(mamam[i][j]) === true) count++;
+        for (let j = 0; j < square[i].length; j++) {
+            if (vowels.includes(square[i][j]) === true) count++;
         }
 
-        if (count === 4) result.push(mamam[i]);
+        if (count === 4) result.push(square[i]);
     }
 
+    // cli table
+    let table = new Table({
+        colWidths: [3, 3, 3, 3, 3]
+    });
+
+    for (let j = 0; j < result.length; j++) {
+        table.push(
+            {[j + 1]: result[j]}
+        );
+    }
+
+    console.log(table.toString());
     return result;
 }
 
-function count() {
-    return checkAllVowels().length;
-}
 
-console.log(checkAllVowels());
-console.log(count());
+checkAllVowels();
